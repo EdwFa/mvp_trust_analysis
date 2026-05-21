@@ -1,0 +1,8 @@
+streamlit
+pandas
+openpyxl
+PyPDF2
+openai
+python-dotenv
+pymupdf
+xmltodict
