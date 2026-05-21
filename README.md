@@ -12,36 +12,36 @@
 
 ```mermaid
 flowchart TD
-    subgraph Frontend ["Frontend (React + Vite + Tailwind)"]
-        UI[Пользовательский интерфейс]
-        DragDrop[Загрузка XML и PDF]
-        Modal[Просмотр оригинала PDF]
-        Report[Отчет о сверке]
-        
+    subgraph Frontend["Frontend (React + Vite + Tailwind)"]
+        UI["Пользовательский интерфейс"]
+        DragDrop["Загрузка XML и PDF"]
+        Modal["Просмотр оригинала PDF"]
+        Report["Отчет о сверке"]
+
         UI --> DragDrop
         UI --> Modal
         UI --> Report
     end
 
-    subgraph Backend ["Backend (FastAPI)"]
-        API(POST /api/analyze)
-        A1(Агент 1: Парсер XML)
-        A2(Агент 2: Vision LLM)
-        A3{Агент 3: Модуль Валидации}
-        
+    subgraph Backend["Backend (FastAPI)"]
+        API["POST /api/analyze"]
+        A1["Агент 1: Парсер XML"]
+        A2["Агент 2: Vision LLM"]
+        A3["Агент 3: Модуль Валидации"]
+
         API --> A1
         API --> A2
-        A1 -->|Массив заявлений (JSON)| A3
-        A2 -->|Извлеченные данные (JSON)| A3
-        A3 -->|Статус валидации и детали| API
+        A1 -- "Массив заявлений (JSON)" --> A3
+        A2 -- "Извлеченные данные (JSON)" --> A3
+        A3 -- "Статус валидации и детали" --> API
     end
 
-    subgraph AI ["Local AI (Ollama)"]
-        Qwen[Qwen3-VL:30B]
+    subgraph AI["Local AI (Ollama)"]
+        Qwen["Qwen3-VL:30B"]
     end
 
-    DragDrop <==>|Файлы по HTTP| API
-    A2 <==>|Запрос с картинками (Base64)| Qwen
+    DragDrop <==>|"Файлы по HTTP"| API
+    A2 <==>|"Запрос с картинками (Base64)"| Qwen
 ```
 
 ---
